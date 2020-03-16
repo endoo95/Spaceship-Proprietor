@@ -63,15 +63,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BackgroundScript.cs" />
-    <Compile Include="Assets\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\Custom Scripts\IEntity.cs" />
-    <Compile Include="Assets\Scripts\HealthBarScript.cs" />
-    <Compile Include="Assets\Scripts\MeteorBarFollow.cs" />
-    <Compile Include="Assets\Scripts\MeteorScript.cs" />
-    <Compile Include="Assets\Scripts\MeteorsSpawnScript.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\PlayerShipScript.cs" />
+    <Compile Include="Assets\Scripts\Basic\BackgroundScript.cs" />
+    <Compile Include="Assets\Scripts\Basic\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Basic\HealthBarScript.cs" />
+    <Compile Include="Assets\Scripts\Basic\MeteorBarFollow.cs" />
+    <Compile Include="Assets\Scripts\Basic\MeteorScript.cs" />
+    <Compile Include="Assets\Scripts\Basic\MeteorsSpawnScript.cs" />
+    <Compile Include="Assets\Scripts\Basic\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Basic\ShipDamageHandler.cs" />
+    <Compile Include="Assets\Scripts\Data\MeteorScriptableObject.cs" />
+    <Compile Include="Assets\Scripts\Data\ShipScriptableObject.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IEntity.cs" />
     <None Include="Assets\Zadania.txt" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>C:/Users/endoo/Documents/GitHub/Spaceship-Proprietor/Spaceship Proprietor - Project/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>

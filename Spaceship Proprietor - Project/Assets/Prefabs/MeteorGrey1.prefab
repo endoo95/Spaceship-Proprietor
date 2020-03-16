@@ -151,8 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4636834557957230548}
-  - component: {fileID: 732287750}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MeteorGrey1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,24 +174,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &732287750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4636834557957230549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a3ebace3797b3459c6511f82090042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flySpeed: 3
-  turnSpeed: 20
-  health: 50
-  health30: 0
-  rb: {fileID: 0}
-  healtBar: {fileID: 0}
 --- !u!1 &4636834558220593339
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +298,8 @@ GameObject:
   - component: {fileID: 9019666117484147943}
   - component: {fileID: 9019666117484147940}
   - component: {fileID: 9019666117484147938}
-  m_Layer: 0
+  - component: {fileID: 1455092755}
+  m_Layer: 9
   m_Name: Meteor
   m_TagString: Meteor
   m_Icon: {fileID: 0}
@@ -425,3 +407,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1455092755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019666117484147936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a3ebace3797b3459c6511f82090042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  parent: {fileID: 4636834557957230549}
+  meteorScriptableObject: {fileID: 11400000, guid: f0baf5e880b59e64f857656969d26742,
+    type: 2}
+  healtBar: {fileID: 0}
+  flySpeed: 0
+  turnSpeed: 0
+  health: 0
+  health30: 0
