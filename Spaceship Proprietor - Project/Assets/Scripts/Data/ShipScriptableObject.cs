@@ -9,6 +9,7 @@ public class ShipScriptableObject : ScriptableObject
     public int maxArmor;
 
     public int maxShield;
+    public float shieldRecharge;
 
     public int maxHealth;
 }

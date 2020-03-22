@@ -21,9 +21,10 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
 
     private float meteorDamage;
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision!");
+        //Debug.Log("Collision!");
         collidedObject = collision.gameObject;
     }
 
@@ -70,17 +71,22 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
 
     private void Update()
     {
-        DoIColide();
-
         Destroy(parent, 25f);
     }
 
-    void DoIColide()
+    private void LateUpdate()
+    {
+        DoIColide();
+    }
+
+    private void DoIColide()
     {
         if(collidedObject == null)
         {
             return;
         }
+
+        CollideRecoil();
 
         string tag;
         tag = collidedObject.tag;
@@ -88,7 +94,7 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
         TakeDamage(meteorDamage);
         UpdateHealth();
 
-        Debug.Log(tag);
+        //Debug.Log(tag);
         switch (tag)
         {
             case "Ship":
@@ -103,6 +109,7 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
             default:
                 break;
         }
+        collidedObject = null;
     }
 
     public void TakeDamage(float damage)
@@ -120,7 +127,7 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
         return health;
     }
 
-    void UpdateHealth()
+    private void UpdateHealth()
     {
         barSize = health / 50f;
         healtBar.SetSize(barSize);
@@ -149,5 +156,16 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
         {
             Destroy(parent);
         }
+    }
+
+    private void CollideRecoil()
+    {
+        Vector2 vector;
+        vector = transform.position - collidedObject.gameObject.transform.position;
+
+        Vector2 force;
+        force = rb.velocity + vector;
+
+        rb.velocity = force / 2;
     }
 }

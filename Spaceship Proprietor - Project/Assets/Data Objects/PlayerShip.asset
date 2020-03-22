@@ -16,4 +16,5 @@ MonoBehaviour:
   turnSpeed: 20
   maxArmor: 20
   maxShield: 3
+  shieldRecharge: 0.5
   maxHealth: 70

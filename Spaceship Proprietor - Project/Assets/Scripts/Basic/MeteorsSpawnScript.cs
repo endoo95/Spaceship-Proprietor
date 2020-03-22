@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MeteorsSpawnScript : MonoBehaviour
 {
-    public GameObject meteorPrefab;
-    public Transform playerPosition;
+    [SerializeField] private GameObject meteorPrefab;
+    [SerializeField] private Transform playerPosition;
+
+    [SerializeField] private float timeBetwenMeteors = 1.5f;
 
     private int spawnSide;
     private int spawnOffsetX = 15;
     private int spawnOffsetY = 10;
-
-    private float timeBetwenMeteors = 1.5f;
 
     private Vector2 spawnPoint;
     private Vector2 meteorPosition;
