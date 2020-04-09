@@ -7,13 +7,14 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject parent;
     [SerializeField] private MeteorScriptableObject meteorScriptableObject;
-    [SerializeField] private HealthBarScript healtBar;
+    [SerializeField] private BarScript healthBar;
+
+    [SerializeField] private string meteorSize;
 
     private GameObject collidedObject;
 
     public float flySpeed = 3f;
     public float turnSpeed = 2f;
-    private float rotationRandom;
 
     public float health = 50f;
     public bool health30 = false;
@@ -24,7 +25,6 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("Collision!");
         collidedObject = collision.gameObject;
     }
 
@@ -42,6 +42,7 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
         flySpeed = meteorScriptableObject.flySpeed;
         turnSpeed = meteorScriptableObject.turnSpeed;
         health = meteorScriptableObject.maxHealth;
+        meteorSize = meteorScriptableObject.meteorSize;
 
         meteorDamage = health / 3;
         parent = transform.parent.gameObject;
@@ -51,22 +52,23 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
         rb.gravityScale = 0;
         rb.angularDrag = 0;
 
-        healtBar = parent.transform.Find("HealthBar").GetComponent<HealthBarScript>();
+        healthBar = parent.transform.Find("HealthBar").GetComponent<BarScript>();
 
+        float rotationRandom;
         rotationRandom = Random.Range(-50f, 50f);
 
         rb.angularVelocity = turnSpeed * rotationRandom * 10 * Time.fixedDeltaTime;
 
         Vector2 randomForce;
-        randomForce = new Vector2(flySpeed * Random.Range(-5f, 5f) * 10, flySpeed * Random.Range(-5f, 5f) * 10);
+        randomForce = new Vector2(flySpeed * Random.Range(-5f, 5f), flySpeed * Random.Range(-5f, 5f));
 
         Vector2 force;
         force = randomForce;
 
         rb.AddForce(force);
 
-        healtBar.SetSize(barSize);
-        healtBar.SetColor(Color.green);
+        healthBar.SetSize(barSize);
+        healthBar.SetColor(Color.green);
     }
 
     private void Update()
@@ -94,7 +96,6 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
         TakeDamage(meteorDamage);
         UpdateHealth();
 
-        //Debug.Log(tag);
         switch (tag)
         {
             case "Ship":
@@ -130,7 +131,7 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
     private void UpdateHealth()
     {
         barSize = health / 50f;
-        healtBar.SetSize(barSize);
+        healthBar.SetSize(barSize);
 
         if (barSize > 0)
         {

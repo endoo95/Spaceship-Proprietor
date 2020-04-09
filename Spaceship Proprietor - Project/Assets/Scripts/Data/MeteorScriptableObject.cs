@@ -7,4 +7,6 @@ public class MeteorScriptableObject : ScriptableObject
     public float turnSpeed;
 
     public int maxHealth;
+
+    public string meteorSize;
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeteorsSpawnScript : MonoBehaviour
 {
-    [SerializeField] private GameObject meteorPrefab;
+    [SerializeField] private GameObject[] meteorPrefab;
     [SerializeField] private Transform playerPosition;
 
     [SerializeField] private float timeBetwenMeteors = 1.5f;
@@ -49,10 +49,13 @@ public class MeteorsSpawnScript : MonoBehaviour
         meteorPosition.y = playerPosition.position.y + spawnPoint.y;
         //Debug.Log("Meteor Position: " + meteorPosition);
 
+        int random;
+        random = Random.Range(0, meteorPrefab.Length);
+
         Vector2 vector;
         vector = new Vector2(meteorPosition.x, meteorPosition.y);
 
-        var newMeteor = Instantiate(meteorPrefab, vector, Quaternion.identity);
+        var newMeteor = Instantiate(meteorPrefab[random], vector, Quaternion.identity);
         newMeteor.transform.parent = gameObject.transform;
     }
 
