@@ -16,6 +16,7 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
     public float flySpeed = 3f;
     public float turnSpeed = 2f;
 
+    public float maxHealth = 50f;
     public float health = 50f;
     public bool health30 = false;
     private float barSize = 1f;
@@ -41,6 +42,7 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
     {
         flySpeed = meteorScriptableObject.flySpeed;
         turnSpeed = meteorScriptableObject.turnSpeed;
+        maxHealth = meteorScriptableObject.maxHealth;
         health = meteorScriptableObject.maxHealth;
         meteorSize = meteorScriptableObject.meteorSize;
 
@@ -130,7 +132,7 @@ public class MeteorScript : MonoBehaviour, IHaveHealth
 
     private void UpdateHealth()
     {
-        barSize = health / 50f;
+        barSize = health / maxHealth;
         healthBar.SetSize(barSize);
 
         if (barSize > 0)
