@@ -18,6 +18,7 @@ public class MeteorsSpawnScript : MonoBehaviour
 
     private void Start()
     {
+        playerPosition = GameObject.FindGameObjectWithTag("Player").transform.Find("Ship").transform;
         StartCoroutine(Spawner());
     }
 

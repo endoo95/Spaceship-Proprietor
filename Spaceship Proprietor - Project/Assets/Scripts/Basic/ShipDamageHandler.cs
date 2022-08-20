@@ -6,11 +6,16 @@ public class ShipDamageHandler : MonoBehaviour, IShip
 {
     [SerializeField] private ShipScriptableObject _shipScriptableObject;
     [SerializeField] private Transform _shieldObject;
+    [SerializeField] private Transform _shipBarsObject;
     [SerializeField] private GameObject _shipObject;
 
     private GameObject _shieldBack;
     private GameObject _shieldFront;
     private GameObject _shieldRing;
+
+    private BarScript _healthBar;
+    private BarScript _armorBar;
+    private BarScript _shieldBar;
 
     private CircleCollider2D _shieldCollider;
     private PolygonCollider2D _hullCollider;
@@ -24,6 +29,8 @@ public class ShipDamageHandler : MonoBehaviour, IShip
     private float countdown;
     private bool isTimerRunning = false;
 
+    private float barSize = 1f;
+
     private void Awake()
     {
         if (_shipScriptableObject == null || _shieldObject == null || _shipObject == null)
@@ -34,18 +41,35 @@ public class ShipDamageHandler : MonoBehaviour, IShip
 
     private void Start()
     {
+        //Find Shield objects
         _shieldBack = _shieldObject.Find("Back").gameObject;
         _shieldFront = _shieldObject.Find("Front").gameObject;
         _shieldRing = _shieldObject.Find("Ring").gameObject;
 
+        //Find bars objects
+        _healthBar = _shipBarsObject.Find("HealthBar").gameObject.GetComponent<BarScript>();
+        _armorBar = _shipBarsObject.Find("ArmorBar").gameObject.GetComponent<BarScript>();
+        _shieldBar = _shipBarsObject.Find("ShieldBar").gameObject.GetComponent<BarScript>();
+
+        //Assign colliders
         _shieldCollider = _shipObject.GetComponent<CircleCollider2D>();
         _hullCollider = _shipObject.GetComponent<PolygonCollider2D>();
 
+        //Load scriptable object values
         _shipArmor = _shipScriptableObject.maxArmor;
         _shipShield = _shipScriptableObject.maxShield;
         _shipHull = _shipScriptableObject.maxHealth;
         _shieldRecharge = _shipScriptableObject.shieldRecharge;
 
+        //Set bars info
+        _healthBar.SetSize(barSize);
+        _healthBar.SetColor(Color.green);
+        _armorBar.SetSize(barSize);
+        _armorBar.SetColor(Color.yellow);
+        _shieldBar.SetSize(barSize);
+        _shieldBar.SetColor(Color.cyan);
+
+        //Init shield
         CalculateTime(_shieldRecharge);
     }
 
@@ -75,6 +99,7 @@ public class ShipDamageHandler : MonoBehaviour, IShip
             {
                 damageLeft -= _shipArmor;
                 ModifyArmor(damage);
+                _armorBar.SetSize(_shipArmor / 100f);
                 if (damageLeft <= 0)
                 {
                     return;
@@ -82,10 +107,13 @@ public class ShipDamageHandler : MonoBehaviour, IShip
                 damage = damageLeft;
             }
             ModifyHealth(damage);
+            _healthBar.SetSize(_shipHull / 100);
         }
         if (_shipHull <= 0)
         {
-            Destroy(gameObject);
+            //TODO: 
+            //Ship destruction
+            Destroy(gameObject.transform.parent.gameObject);
         }
     }
 
@@ -98,21 +126,31 @@ public class ShipDamageHandler : MonoBehaviour, IShip
     public float ModifyArmor(float damage)
     {
         _shipArmor -= damage;
+        if (_shipArmor < 0)
+        {
+            _shipArmor = 0;
+        }
         return _shipArmor;
     }
 
     public float ModifyHealth(float damage)
     {
         _shipHull -= damage;
+        if (_shipHull < 0)
+        {
+            _shipHull = 0;
+        }
         return _shipHull;
     }
 
+    //TODO: Shield bar in segments
     private void ShieldStatus(int shields)
     {
         float maxShield = (float)_shipScriptableObject.maxShield;
         float shieldProcentage;
 
         shieldProcentage = (shields / maxShield) * 100f;
+        _shieldBar.SetSize(shieldProcentage / 100f);
 
         if (shieldProcentage > 70f)
         {

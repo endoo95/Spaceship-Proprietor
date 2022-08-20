@@ -10,9 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c00f9bc177031cf428c334d68a5ee93b, type: 3}
-  m_Name: Laser1
+  m_Name: Anti-Proton Beam
   m_EditorClassIdentifier: 
-  weaponType: 
-  shootingSpeed: 0
-  weaponDamage: 0
-  heatCount: 0
+  weaponName: 
+  Description: 
+  weaponType: 1
+  shootType: 1
+  isKineticDamage: 1
+  isThermalDamage: 0
+  isSpecialDamage: 0
+  kineticDamage: 0
+  thermalDamage: 0
+  slowProcentage: 0
+  weaponOverchage: 0
+  targetList:
+  - Base
+  - Ship
+  - Fighter
+  - Missile
+  - Asteroid
+  weaponFireRate: 0
+  weaponCost: 0

@@ -9,6 +9,11 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private float followSpeed = 0.2f; //Best for from 0 to 1
 
+    private void Start()
+    {
+        myTarget = GameObject.FindGameObjectWithTag("Player").transform.Find("Ship").transform;
+    }
+
     void FixedUpdate()
     {
         if (myTarget != null)
